@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guía Interactiva — Fundamentos de Programación</title>
+  <meta name="description" content="Guía interactiva completa de fundamentos de programación. Aprende variables, funciones, bucles, DOM y más con ejemplos prácticos." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- Particle canvas (behind everything) -->
+<canvas id="bg-canvas"></canvas>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<header class="hero">
+  <div class="container">
+
+    <div class="badge">
+      <span class="badge-dot"></span>
+      📚 Guía Interactiva Completa
+    </div>
+
+    <h1 id="titulo-principal">Fundamentos de<br>Programación</h1>
+
+    <p class="hero-sub">
+      Aprende, practica e interactúa con los conceptos esenciales
+      del desarrollo de software moderno.
+    </p>
+
+    <div class="mission-hint" id="mission-hint">
+      <span>🕵️</span>
+      <p>Misión Secreta: Completa <strong>3 desafíos ocultos</strong> para activar al Agente DOM.</p>
+      <div class="flags" id="flags-display">
+        <span class="flag" id="flag1">🔴 Condición 1</span>
+        <span class="flag" id="flag2">🔴 Condición 2</span>
+        <span class="flag" id="flag3">🔴 Condición 3</span>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ═══════════════ MAIN ═══════════════ -->
+<main class="container">
+
+  <!-- ── 1. VARIABLES ── -->
+  <section class="card" id="seccion-variables">
+    <span class="section-num">01</span>
+    <div class="card-header">
+      <div class="card-icon">📦</div>
+      <div>
+        <h2>Variables y Tipos de Datos</h2>
+        <p class="card-desc">Contenedores que almacenan valores. JavaScript usa tipado dinámico.</p>
+      </div>
+    </div>
+
+    <div class="theory-grid">
+      <div class="theory-block">
+        <h3>Declaración</h3>
+        <pre><code><span class="kw">let</span>   nombre = <span class="str">"Ana"</span>;
+<span class="kw">const</span> edad   = <span class="num">25</span>;
+<span class="kw">var</span>   activo = <span class="kw">true</span>;</code></pre>
+      </div>
+      <div class="theory-block">
+        <h3>Tipos Primitivos</h3>
+        <pre><code><span class="str">"texto"</span>    <span class="cm">// String</span>
+<span class="num">42</span>         <span class="cm">// Number</span>
+<span class="kw">true</span>       <span class="cm">// Boolean</span>
+<span class="kw">null</span>       <span class="cm">// Null</span>
+<span class="kw">undefined</span>  <span class="cm">// Undefined</span></code></pre>
+      </div>
+    </div>
+
+    <div class="interactive-zone">
+      <h3>⚡ Práctica — Declara una Variable</h3>
+      <p>Escribe tu nombre y elige un tipo de dato para ver el código generado en tiempo real.</p>
+      <div class="input-row">
+        <input id="var-nombre" type="text" placeholder="Tu nombre…" maxlength="30" />
+        <select id="var-tipo">
+          <option value="">— Elige un tipo —</option>
+          <option value="String">String (texto)</option>
+          <option value="Number">Number (número)</option>
+          <option value="Boolean">Boolean (verdadero/falso)</option>
+          <option value="Array">Array (lista)</option>
+          <option value="Object">Object (objeto)</option>
+        </select>
+        <button id="btn-variables" class="btn btn-primary">Declarar Variable 🚀</button>
+      </div>
+      <div id="resultado-variables" class="result-box hidden"></div>
+    </div>
+  </section>
+
+  <!-- ── 2. CONDICIONALES ── -->
+  <section class="card" id="seccion-condicionales">
+    <span class="section-num">02</span>
+    <div class="card-header">
+      <div class="card-icon">🔀</div>
+      <div>
+        <h2>Condicionales</h2>
+        <p class="card-desc">Toma decisiones en tiempo de ejecución según condiciones evaluadas.</p>
+      </div>
+    </div>
+
+    <div class="theory-grid">
+      <div class="theory-block">
+        <h3>if / else if / else</h3>
+        <pre><code><span class="kw">if</span> (edad &gt;= <span class="num">18</span>) {
+  console.log(<span class="str">"Mayor"</span>);
+} <span class="kw">else if</span> (edad &gt;= <span class="num">13</span>) {
+  console.log(<span class="str">"Teen"</span>);
+} <span class="kw">else</span> {
+  console.log(<span class="str">"Niño"</span>);
+}</code></pre>
+      </div>
+      <div class="theory-block">
+        <h3>Operador Ternario</h3>
+        <pre><code><span class="kw">const</span> msg = edad &gt;= <span class="num">18</span>
+  ? <span class="str">"Adulto"</span>
+  : <span class="str">"Menor"</span>;
+
+<span class="cm">// switch también es válido:</span>
+<span class="kw">switch</span>(dia) {
+  <span class="kw">case</span> <span class="str">"lunes"</span>: …
+}</code></pre>
+      </div>
+    </div>
+
+    <div class="interactive-zone">
+      <h3>⚡ Práctica — Calculadora de Categoría</h3>
+      <p>Ingresa una edad y el programa determinará automáticamente la categoría con un ternario anidado.</p>
+      <div class="input-row">
+        <input id="cond-edad" type="number" placeholder="Edad (0–120)" min="0" max="120" />
+        <button id="btn-condicionales" class="btn btn-primary">Evaluar 🔍</button>
+      </div>
+      <div id="resultado-condicionales" class="result-box hidden"></div>
+    </div>
+  </section>
+
+  <!-- ── 3. BUCLES ── -->
+  <section class="card" id="seccion-bucles">
+    <span class="section-num">03</span>
+    <div class="card-header">
+      <div class="card-icon">🔄</div>
+      <div>
+        <h2>Bucles (Loops)</h2>
+        <p class="card-desc">Ejecuta bloques de código repetidamente mientras se cumple una condición.</p>
+      </div>
+    </div>
+
+    <div class="theory-grid">
+      <div class="theory-block">
+        <h3>for clásico</h3>
+        <pre><code><span class="kw">for</span> (<span class="kw">let</span> i = <span class="num">0</span>; i &lt; <span class="num">5</span>; i++) {
+  console.log(i);
+}
+<span class="cm">// 0, 1, 2, 3, 4</span></code></pre>
+      </div>
+      <div class="theory-block">
+        <h3>while / for…of</h3>
+        <pre><code><span class="kw">let</span> i = <span class="num">0</span>;
+<span class="kw">while</span> (i &lt; <span class="num">5</span>) { i++; }
+
+<span class="kw">for</span> (<span class="kw">const</span> x <span class="kw">of</span> arr) {
+  console.log(x);
+}</code></pre>
+      </div>
+    </div>
+
+    <div class="interactive-zone">
+      <h3>⚡ Práctica — Generador de Tablas</h3>
+      <p>Elige un número para generar su tabla de multiplicar con visualización de barras.</p>
+      <div class="input-row">
+        <input id="loop-numero" type="number" placeholder="Número (1–12)" min="1" max="12" />
+        <button id="btn-bucles" class="btn btn-primary">Generar Tabla 📊</button>
+      </div>
+      <div id="resultado-bucles" class="result-box hidden"></div>
+    </div>
+  </section>
+
+  <!-- ── 4. FUNCIONES ── -->
+  <section class="card" id="seccion-funciones">
+    <span class="section-num">04</span>
+    <div class="card-header">
+      <div class="card-icon">⚙️</div>
+      <div>
+        <h2>Funciones</h2>
+        <p class="card-desc">Bloques de código reutilizables que reciben parámetros y retornan valores.</p>
+      </div>
+    </div>
+
+    <div class="theory-grid">
+      <div class="theory-block">
+        <h3>Declaración Clásica</h3>
+        <pre><code><span class="kw">function</span> <span class="fn">saludar</span>(nombre) {
+  <span class="kw">return</span> <span class="str">`Hola, ${nombre}!`</span>;
+}
+<span class="fn">saludar</span>(<span class="str">"Ana"</span>); <span class="cm">// "Hola, Ana!"</span></code></pre>
+      </div>
+      <div class="theory-block">
+        <h3>Arrow Function</h3>
+        <pre><code><span class="kw">const</span> <span class="fn">saludar</span> = (n) =>
+  <span class="str">`Hola, ${n}!`</span>;
+
+<span class="cm">// Con múltiples parámetros:</span>
+<span class="kw">const</span> <span class="fn">suma</span> = (a, b) => a + b;</code></pre>
+      </div>
+    </div>
+
+    <div class="interactive-zone">
+      <h3>⚡ Práctica — Calculadora de Potencias</h3>
+      <p>Ingresa una base y exponente; la función <code>Math.pow()</code> hará el cálculo.</p>
+      <div class="input-row">
+        <input id="fn-base" type="number" placeholder="Base" />
+        <input id="fn-exp"  type="number" placeholder="Exponente" />
+        <button id="btn-funciones" class="btn btn-primary">Calcular ✨</button>
+      </div>
+      <div id="resultado-funciones" class="result-box hidden"></div>
+    </div>
+  </section>
+
+  <!-- ── 5. ARRAYS ── -->
+  <section class="card" id="seccion-arrays">
+    <span class="section-num">05</span>
+    <div class="card-header">
+      <div class="card-icon">📋</div>
+      <div>
+        <h2>Arrays (Arreglos)</h2>
+        <p class="card-desc">Estructuras que almacenan múltiples valores accesibles por índice numérico.</p>
+      </div>
+    </div>
+
+    <div class="theory-grid">
+      <div class="theory-block">
+        <h3>Creación y Acceso</h3>
+        <pre><code><span class="kw">const</span> frutas = [<span class="str">"manzana"</span>, <span class="str">"pera"</span>];
+frutas[<span class="num">0</span>];       <span class="cm">// "manzana"</span>
+frutas.length;  <span class="cm">// 2</span></code></pre>
+      </div>
+      <div class="theory-block">
+        <h3>Métodos Clave</h3>
+        <pre><code>frutas.<span class="fn">push</span>(<span class="str">"uva"</span>);
+frutas.<span class="fn">pop</span>();
+frutas.<span class="fn">map</span>(f => f.toUpperCase());
+frutas.<span class="fn">filter</span>(f => f.length > <span class="num">4</span>);</code></pre>
+      </div>
+    </div>
+
+    <div class="interactive-zone">
+      <h3>⚡ Práctica — Gestor de Lista</h3>
+      <p>Agrega y elimina elementos del arreglo. Observa cómo cambia la representación en código.</p>
+      <div class="input-row">
+        <input id="arr-item" type="text" placeholder="Escribe un elemento…" />
+        <button id="btn-arrays-add"    class="btn btn-primary">Agregar ➕</button>
+        <button id="btn-arrays-remove" class="btn btn-danger">Eliminar ❌</button>
+      </div>
+      <div id="resultado-arrays" class="result-box hidden"></div>
+    </div>
+  </section>
+
+  <!-- ── 6. OBJETOS ── -->
+  <section class="card" id="seccion-objetos">
+    <span class="section-num">06</span>
+    <div class="card-header">
+      <div class="card-icon">🧩</div>
+      <div>
+        <h2>Objetos</h2>
+        <p class="card-desc">Entidades que agrupan propiedades (clave‑valor) y métodos relacionados.</p>
+      </div>
+    </div>
+
+    <div class="theory-grid">
+      <div class="theory-block">
+        <h3>Creación</h3>
+        <pre><code><span class="kw">const</span> persona = {
+  nombre: <span class="str">"Ana"</span>,
+  edad:   <span class="num">25</span>,
+  <span class="fn">saludar</span>() {
+    <span class="kw">return</span> <span class="str">`Soy ${<span class="kw">this</span>.nombre}`</span>;
+  }
+};</code></pre>
+      </div>
+      <div class="theory-block">
+        <h3>Acceso y Desestructuración</h3>
+        <pre><code>persona.nombre;      <span class="cm">// "Ana"</span>
+persona[<span class="str">"edad"</span>];    <span class="cm">// 25</span>
+<span class="fn">persona.saludar</span>();
+
+<span class="kw">const</span> { nombre, edad } = persona;</code></pre>
+      </div>
+    </div>
+
+    <div class="interactive-zone">
+      <h3>⚡ Práctica — Constructor de Objeto</h3>
+      <p>Completa los campos para construir un objeto <code>persona</code> dinámicamente.</p>
+      <div class="input-row">
+        <input id="obj-nombre"    type="text"   placeholder="Nombre" />
+        <input id="obj-edad"      type="number" placeholder="Edad" />
+        <input id="obj-profesion" type="text"   placeholder="Profesión" />
+        <button id="btn-objetos" class="btn btn-primary">Crear Objeto 🧩</button>
+      </div>
+      <div id="resultado-objetos" class="result-box hidden"></div>
+    </div>
+  </section>
+
+  <!-- ── 7. DOM ── -->
+  <section class="card" id="seccion-dom">
+    <span class="section-num">07</span>
+    <div class="card-header">
+      <div class="card-icon">🌐</div>
+      <div>
+        <h2>Manipulación del DOM</h2>
+        <p class="card-desc">Accede y modifica el contenido HTML de la página en tiempo real con JavaScript.</p>
+      </div>
+    </div>
+
+    <div class="theory-grid">
+      <div class="theory-block">
+        <h3>Seleccionar</h3>
+        <pre><code>document.<span class="fn">getElementById</span>(<span class="str">"id"</span>);
+document.<span class="fn">querySelector</span>(<span class="str">".clase"</span>);
+document.<span class="fn">querySelectorAll</span>(<span class="str">"p"</span>);</code></pre>
+      </div>
+      <div class="theory-block">
+        <h3>Modificar</h3>
+        <pre><code>el.textContent    = <span class="str">"Nuevo"</span>;
+el.style.color    = <span class="str">"red"</span>;
+el.classList.<span class="fn">add</span>(<span class="str">"activo"</span>);
+el.<span class="fn">setAttribute</span>(<span class="str">"href"</span>, <span class="str">"#"</span>);</code></pre>
+      </div>
+    </div>
+
+    <div class="interactive-zone">
+      <h3>⚡ Práctica — Editor en Vivo</h3>
+      <p>Cambia texto y colores del elemento de abajo directamente desde JavaScript.</p>
+      <div class="live-editor">
+        <div id="dom-preview-box">
+          <p id="dom-preview-text">Este texto cambiará en tiempo real.</p>
+        </div>
+        <div class="editor-controls">
+          <input id="dom-text-input"  type="text"  placeholder="Nuevo texto…" style="flex:1;min-width:160px;" />
+          <input id="dom-color-input" type="color"  value="#6366f1" title="Color de texto" />
+          <input id="dom-bg-input"    type="color"  value="#1e1b4b" title="Color de fondo" />
+          <button id="btn-dom" class="btn btn-primary">Aplicar Cambios 🎨</button>
+        </div>
+      </div>
+      <div id="resultado-dom" class="result-box hidden" style="margin-top:12px;"></div>
+    </div>
+  </section>
+
+  <!-- ── 8. EVENTOS ── -->
+  <section class="card" id="seccion-eventos">
+    <span class="section-num">08</span>
+    <div class="card-header">
+      <div class="card-icon">⚡</div>
+      <div>
+        <h2>Eventos</h2>
+        <p class="card-desc">Reacciona a las acciones del usuario usando <code>addEventListener</code> y el objeto <code>Event</code>.</p>
+      </div>
+    </div>
+
+    <div class="theory-grid">
+      <div class="theory-block">
+        <h3>addEventListener</h3>
+        <pre><code>btn.<span class="fn">addEventListener</span>(<span class="str">"click"</span>, (e) => {
+  console.log(e.target);
+});</code></pre>
+      </div>
+      <div class="theory-block">
+        <h3>Tipos de Eventos</h3>
+        <pre><code><span class="str">"click"</span>      <span class="cm">// Mouse</span>
+<span class="str">"keydown"</span>    <span class="cm">// Teclado</span>
+<span class="str">"mouseover"</span>  <span class="cm">// Hover</span>
+<span class="str">"submit"</span>     <span class="cm">// Formulario</span>
+<span class="str">"change"</span>     <span class="cm">// Input</span></code></pre>
+      </div>
+    </div>
+
+    <div class="interactive-zone">
+      <h3>⚡ Práctica — Panel de Eventos en Vivo</h3>
+      <p>Interactúa con los elementos de abajo y observa los eventos disparados en el log.</p>
+      <div class="event-playground">
+        <button id="btn-eventos-click" class="btn btn-primary event-btn">🖱️ Haz Clic Aquí</button>
+        <div id="hover-zone" class="hover-zone">🔲 Pasa el Mouse Por Aquí</div>
+        <input id="key-input" type="text" placeholder="⌨️ Escribe Algo…" class="key-input" />
+      </div>
+      <div id="resultado-eventos" class="result-box">
+        <strong style="color:var(--accent2);">Log de Eventos:</strong>
+        <div id="event-log"></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-logo">{ JS }</div>
+      <p>Guía Interactiva Completa · Fundamentos de Programación</p>
+      <p class="footer-sub">Creada para el aprendizaje activo mediante interacción con el DOM.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
